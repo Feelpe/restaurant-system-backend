@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: Todo
+    ports:
+      - "27017:27017"
+    volumes:
+      - "postgres:/data/postgres"
+    networks:
+      - "api-network"
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "pgadmin4@pgadmin.org"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - "5555:80"
+    volumes:
+      - "pgadmin:/var/lib/pgadmin"
+    networks:
+      - "api-network"
+    depends_on:
+      - "postgres"
+    restart: unless-stopped
+  
+  api-restaurant:
+    image: felipess/api-restaurant:v1
+    stdin_open: true
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=postgresql://postgresuser:postgrespwd@postgres:27017/Todo?schema=public
+    ports:
+      - "8080:8080"
+    networks:
+      - "api-network"
+    depends_on:
+      - "postgres"
+    restart: always
+
+networks:
+  api-network:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
