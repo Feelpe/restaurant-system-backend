@@ -1,10 +1,15 @@
-FROM node:alpine
-WORKDIR /app
-COPY package*.json ./
-COPY prisma ./prisma/
-COPY tsconfig.json ./
-COPY . .
-RUN npm install
-RUN npx prisma generate
-RUN npm run build
-CMD [ "node", "dist/main.js" ]
+FROM node:18 As development
+
+RUN apt-get update && apt-get install -y openssl
+
+WORKDIR /usr/src/app
+
+COPY --chown=node:node package*.json ./
+
+RUN npm ci
+
+COPY --chown=node:node . .
+
+RUN npm run prisma:generate
+
+USER node
