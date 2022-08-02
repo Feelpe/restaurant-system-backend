@@ -1,31 +1,29 @@
-version: '3'
+services:
+  # api:
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: .
+  #     target: development
+  #   volumes:
+  #     - .:/usr/src/app
+  #     - ./usr/src/app/node_modules
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     DATABASE_URL: "postgresql://postgres:20024061@postgres:5432/docker-nest-postgres?schema=public"
+  #   command: npm run start:dev
+  #   ports:
+  #     - 3000:3000
+  #   depends_on:
+  #     - redis
+  #     - postgres
 
-services:  
-  api-restaurant:
-    build:
-      dockerfile: Dockerfile
-      context: .
-      target: development
-    env_file:
-    - .env
-    environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
-    command: npm run start:dev
-    ports:
-      - 3000:3000
-    depends_on:
-      - redis
-      - postgres
-    volumes:
-      - .:/usr/src/app
-      - ./usr/src/app/node_modules
-
-  redis:
-    image: redis
-    ports:
-      - 6379:6379
-    volumes:
-      - redis:/data
+  # redis: 
+  #   image: redis
+  #   ports:
+  #     - 6379:6379
+  #   volumes:
+  #     - redis:/data
 
   postgres:
     image: postgres
@@ -39,11 +37,7 @@ services:
     volumes:
       - docker-nest-postgres:/var/lib/postgresql/data
 
-networks:
-  api-network:
-    driver: bridge
-
 volumes:
-  redis:
-    driver: local
+  # redis:
+  #   driver: local
   docker-nest-postgres:
