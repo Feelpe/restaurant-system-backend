@@ -38,13 +38,12 @@ model Menu {
 }
 
 model Mesa {
-  id     String   @id @default(uuid())
-  start  DateTime
-  end    DateTime
-  User   User?    @relation(fields: [userId], references: [id])
-  userId String?
-  Menu   Menu     @relation(fields: [menuId], references: [id])
-  menuId String
+  id         String  @id @default(uuid())
+  mesaNumber String
+  User       User?   @relation(fields: [userId], references: [id])
+  userId     String?
+  Menu       Menu    @relation(fields: [menuId], references: [id])
+  menuId     String
 
   @@map("mesa")
 }

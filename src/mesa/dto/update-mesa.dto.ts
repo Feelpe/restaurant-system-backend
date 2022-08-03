@@ -7,4 +7,10 @@ export class UpdateMesaDto {
   @IsOptional()
   @ApiProperty()
   menu: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  @ApiProperty()
+  mesaNumber: string;
 }

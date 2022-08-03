@@ -28,8 +28,7 @@ CREATE TABLE "menu" (
 -- CreateTable
 CREATE TABLE "mesa" (
     "id" TEXT NOT NULL,
-    "start" TIMESTAMP(3) NOT NULL,
-    "end" TIMESTAMP(3) NOT NULL,
+    "mesaNumber" TEXT NOT NULL,
     "userId" TEXT,
     "menuId" TEXT NOT NULL,
 

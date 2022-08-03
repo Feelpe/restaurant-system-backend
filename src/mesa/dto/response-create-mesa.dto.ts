@@ -1,10 +1,4 @@
-import {
-  IsString,
-  IsEmail,
-  IsDateString,
-  IsUrl,
-  IsNotEmpty,
-} from 'class-validator';
+import { IsString, IsEmail, IsUrl, IsNotEmpty } from 'class-validator';
 
 export class ResponseCreateMesaDto {
   @IsString()
@@ -13,19 +7,15 @@ export class ResponseCreateMesaDto {
 
   @IsString()
   @IsNotEmpty()
+  mesaNumber: string;
+
+  @IsString()
+  @IsNotEmpty()
   userName: string;
 
   @IsEmail()
   @IsNotEmpty()
   userEmail: string;
-
-  @IsDateString()
-  @IsNotEmpty()
-  mesaStart: Date;
-
-  @IsDateString()
-  @IsNotEmpty()
-  mesaEnd: Date;
 
   @IsString()
   @IsNotEmpty()

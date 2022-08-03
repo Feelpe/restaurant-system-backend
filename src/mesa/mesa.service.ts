@@ -22,8 +22,7 @@ export class MesaService {
 
     const createdMesa = await this.prismaService.mesa.create({
       data: {
-        start: createMesaDto.start,
-        end: createMesaDto.end,
+        mesaNumber: createMesaDto.mesaNumber,
         User: {
           connect: {
             id: user.id,
@@ -39,10 +38,9 @@ export class MesaService {
 
     const responseCreateMesaDto: ResponseCreateMesaDto = {
       mesaId: createdMesa.id,
+      mesaNumber: createdMesa.mesaNumber,
       userName: `${user.firstName} ${user.lastName}`,
       userEmail: user.email,
-      mesaStart: createdMesa.start,
-      mesaEnd: createdMesa.end,
       menuTitle: menuInfo.title,
       menuPrice: menuInfo.price,
       menuDescription: menuInfo.description,
