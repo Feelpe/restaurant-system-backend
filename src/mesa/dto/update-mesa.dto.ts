@@ -6,11 +6,5 @@ export class UpdateMesaDto {
   @IsNotEmpty()
   @IsOptional()
   @ApiProperty()
-  menu: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @IsOptional()
-  @ApiProperty()
   mesaNumber: string;
 }

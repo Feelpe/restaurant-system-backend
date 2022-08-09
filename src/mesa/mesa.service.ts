@@ -82,7 +82,9 @@ export class MesaService {
 
     const updatedMesa = await this.prismaService.mesa.update({
       where: { id: mesaId },
-      data: {},
+      data: {
+        mesaNumber: updateMesaDto.mesaNumber,
+      },
     });
 
     return updatedMesa;
